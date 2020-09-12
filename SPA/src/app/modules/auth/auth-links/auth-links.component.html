@@ -1,0 +1,14 @@
+<ul class="navbar-nav ml-auto">
+	<li class="nav-item" *ngIf="!authService.isLoggedIn">
+		<a class="nav-link" [routerLink]="['login']" routerLinkActive="active"><i class="fas fa-sign-in-alt"></i> Login</a>
+	</li>
+	<li class="nav-item" *ngIf="!authService.isLoggedIn">
+		<a class="nav-link" [routerLink]="['register']" routerLinkActive="active"><i class="fas fa-user-plus"></i> Register</a>
+	</li>
+	<li class="nav-item" *ngIf="authService.isLoggedIn">
+		<a class="nav-link" (click)="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+	</li>
+	<li class="nav-item" *ngIf="authService.isLoggedIn">
+		<a class="nav-link" [routerLink]="['manager']" routerLinkActive="active"><i class="fas fa-user"></i> Profile</a>
+	</li>
+</ul>

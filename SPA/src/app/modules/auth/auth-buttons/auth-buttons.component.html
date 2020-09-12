@@ -1,0 +1,9 @@
+<a class="btn btn-success btn-lg mr-3" [routerLink]="['login']" role="button" *ngIf="!authService.isLoggedIn"><i class="fas fa-sign-in-alt"></i>
+	Login</a>
+
+<a class="btn btn-info btn-lg mr-3" [routerLink]="['register']" role="button" *ngIf="!authService.isLoggedIn"><i class="fas fa-user-plus"></i>
+	Register</a>
+
+<a class="btn btn-danger btn-lg mr-3" (click)="logout()" *ngIf="authService.isLoggedIn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+
+<a class="btn btn-warning btn-lg mr-3" [routerLink]="['manager']" *ngIf="authService.isLoggedIn"><i class="fas fa-user"></i> Profile</a>
