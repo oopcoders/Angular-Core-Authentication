@@ -33,7 +33,17 @@ namespace API
 			//If you are using sqlServer
 			//services.AddDbContext<ApplicationDBContext>(x => x.UseSqlServer(Configuration.GetConnectionString("Default")));
 
-			services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDBContext>();
+			services.AddIdentity<IdentityUser, IdentityRole>(opt =>
+			{
+				opt.Password.RequireDigit = false;
+				opt.Password.RequireLowercase = false;
+				opt.Password.RequireNonAlphanumeric = false;
+				opt.Password.RequireUppercase = false;
+				opt.Password.RequiredLength = 4;
+
+				opt.User.RequireUniqueEmail = true;
+			}
+			).AddEntityFrameworkStores<ApplicationDBContext>();
 
 		}
 
