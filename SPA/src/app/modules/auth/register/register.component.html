@@ -28,7 +28,7 @@
 				</select>
 			</div>
 			<div class="form-group">
-				<label for="inputClaim">Department (THIS IS A Claim)</label>
+				<label for="inputClaim">Claim (THIS IS A Claim)</label>
 				<select id="inputClaim" class="form-control" #claim (change)="claimChange(claim.value)">
 					<option value="" disabled>Choose a Developer Type</option>
 					<option *ngFor="let type of developerType" [ngValue]="type">

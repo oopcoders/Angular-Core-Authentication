@@ -32,11 +32,20 @@ export class RegisterComponent implements OnInit {
     this.alertService.info('Creating new user');
     this.progressService.startLoading();
 
-    setTimeout(() => {
-      this.progressService.setSuccess();
-      this.progressService.completeLoading();
-      this.alertService.success('Welcome New User');
-    }, 3000);
+    const registerObserver = {
+      next: (x) => {
+        this.progressService.setSuccess();
+        this.alertService.success('Account Created');
+        this.progressService.completeLoading();
+      },
+      error: (err) => {
+        this.progressService.setFailure();
+        this.alertService.danger(err.error.errors[0].description);
+        this.progressService.completeLoading();
+      },
+    };
+
+    this.authService.register(this.model).subscribe(registerObserver);
   }
 
   roleChange(value) {

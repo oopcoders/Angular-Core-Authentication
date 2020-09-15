@@ -18,6 +18,10 @@ export class AuthService {
     this.isLoggedIn = false;
   }
 
+  register(model: any) {
+    return this.http.post(this.baseUrl + 'identity/register', model);
+  }
+
   confirmEmail(model: any) {
     //Video 16
     return of();
