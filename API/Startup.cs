@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Core.Data;
+using Core.Services.Token;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,6 +30,10 @@ namespace API
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddControllers();
+
+			services.AddScoped<IJWTTokenGenerator, JWTTokenGenerator>();
+
+
 			services.AddDbContext<ApplicationDBContext>(x => x.UseSqlite(Configuration.GetConnectionString("Default")));
 			//If you are using sqlServer
 			//services.AddDbContext<ApplicationDBContext>(x => x.UseSqlServer(Configuration.GetConnectionString("Default")));
