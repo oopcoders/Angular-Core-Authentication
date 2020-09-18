@@ -26,6 +26,8 @@ export class AuthService {
         this.currentUser.username = response.username;
         this.currentUser.email = response.email;
 
+        localStorage.setItem('token', response.token);
+
         return this.currentUser;
       })
     );
