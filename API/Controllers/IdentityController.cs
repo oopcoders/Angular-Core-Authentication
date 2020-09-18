@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.ViewModels;
+using Core.Services.Token;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -16,9 +17,11 @@ namespace API.Controllers
 
 		private readonly UserManager<IdentityUser> _userManager;
 		private readonly SignInManager<IdentityUser> _signInManager;
+		private readonly IJWTTokenGenerator _jwtToken;
 
-		public IdentityController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+		public IdentityController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IJWTTokenGenerator jwtToken)
 		{
+			_jwtToken = jwtToken;
 			_signInManager = signInManager;
 			_userManager = userManager;
 
@@ -47,7 +50,7 @@ namespace API.Controllers
 				result = result,
 				username = userFromDb.UserName,
 				email = userFromDb.Email,
-				token = "Token goes here"
+				token = _jwtToken.GenerateToken(userFromDb)
 			});
 		}
 
