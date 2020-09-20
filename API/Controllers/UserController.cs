@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -21,6 +22,7 @@ namespace API.Controllers
 		//Only admins should be able to get all admins
 		//For testing roles
 		[HttpGet]
+		[Authorize(Roles = "Administrator")]
 		public IActionResult GetAllAdmins()
 		{
 			return Ok();
@@ -28,6 +30,7 @@ namespace API.Controllers
 		//Only admins should be able to get all managers
 		//For testing roles
 		[HttpGet("managers")]
+		[Authorize(Roles = "Manager")]
 		public IActionResult GetAllManagers()
 		{
 			return Ok();

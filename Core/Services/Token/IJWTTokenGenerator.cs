@@ -6,6 +6,6 @@ namespace Core.Services.Token
 {
 	public interface IJWTTokenGenerator
 	{
-		string GenerateToken(IdentityUser user);
+		string GenerateToken(IdentityUser user, IList<string> roles);
 	}
 }
