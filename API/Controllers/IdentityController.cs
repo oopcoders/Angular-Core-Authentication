@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using API.ViewModels;
 using Core.Services.Token;
@@ -53,12 +54,14 @@ namespace API.Controllers
 			}
 
 			var roles = await _userManager.GetRolesAsync(userFromDb);
+
+			IList<Claim> claims = await _userManager.GetClaimsAsync(userFromDb);
 			return Ok(new
 			{
 				result = result,
 				username = userFromDb.UserName,
 				email = userFromDb.Email,
-				token = _jwtToken.GenerateToken(userFromDb, roles)
+				token = _jwtToken.GenerateToken(userFromDb, roles, claims)
 			});
 		}
 
@@ -87,6 +90,10 @@ namespace API.Controllers
 
 				//Add role to user
 				await _userManager.AddToRoleAsync(userFromDb, model.Role);
+
+				var claim = new Claim("JobTitle", model.JobTitle);
+
+				await _userManager.AddClaimAsync(userFromDb, claim);
 
 				return Ok(result);
 			}

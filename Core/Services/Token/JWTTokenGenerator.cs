@@ -18,13 +18,16 @@ namespace Core.Services.Token
 			_config = config;
 
 		}
-		public string GenerateToken(IdentityUser user, IList<string> roles)
+		public string GenerateToken(IdentityUser user, IList<string> roles, IList<Claim> claims)
 		{
-			var claims = new List<Claim>
-			{
-				new Claim(JwtRegisteredClaimNames.GivenName , user.UserName),
-				new Claim(JwtRegisteredClaimNames.Email , user.Email),
-			};
+			// var claims = new List<Claim>
+			// {
+			// 	new Claim(JwtRegisteredClaimNames.GivenName , user.UserName),
+			// 	new Claim(JwtRegisteredClaimNames.Email , user.Email),
+			// };
+
+			claims.Add(new Claim(JwtRegisteredClaimNames.GivenName, user.UserName));
+			claims.Add(new Claim(JwtRegisteredClaimNames.Email, user.Email));
 
 			foreach (var role in roles)
 			{
