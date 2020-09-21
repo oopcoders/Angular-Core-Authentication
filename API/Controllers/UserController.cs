@@ -44,6 +44,7 @@ namespace API.Controllers
 		}
 		//For testing claims and policies
 		[HttpGet("managerdevelopers")]
+		[Authorize(Policy = "ManagerDevelopers")]
 		public IActionResult AdminDesigners()
 		{
 			return Ok(new
@@ -55,6 +56,7 @@ namespace API.Controllers
 
 		//For testing claims and policies
 		[HttpGet("admindevelopers")]
+		[Authorize(Policy = "AdminDevelopers")]
 		public IActionResult AdminDevelopers()
 		{
 			return Ok(new

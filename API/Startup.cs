@@ -72,6 +72,20 @@ namespace API
 				};
 			});
 
+			services.AddAuthorization(options =>
+			{
+				options.AddPolicy("ManagerDevelopers", md =>
+				{
+					md.RequireClaim("jobtitle", "Developer");
+					md.RequireRole("Manager");
+				});
+				options.AddPolicy("AdminDevelopers", ad =>
+				{
+					ad.RequireClaim("jobtitle", "Developer");
+					ad.RequireRole("Administrator");
+				});
+			});
+
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
