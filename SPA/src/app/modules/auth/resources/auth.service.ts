@@ -4,27 +4,33 @@ import { environment } from 'src/environments/environment';
 import { Observable, of } from 'rxjs';
 import { IUser } from './IUser';
 import { map } from 'rxjs/operators';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   baseUrl: string = environment.baseUrl;
-  isLoggedIn: boolean;
+
+  helper = new JwtHelperService();
 
   currentUser: IUser = {
     username: null,
     email: null,
+    role: null,
+    jobtitle: null,
   };
   constructor(private http: HttpClient) {}
 
   login(model: any): Observable<IUser> {
     return this.http.post(this.baseUrl + 'identity/login', model).pipe(
       map((response: any) => {
-        //temporary
-        this.isLoggedIn = response.result.succeeded;
-        this.currentUser.username = response.username;
-        this.currentUser.email = response.email;
+        const decodedToken = this.helper.decodeToken(response.token);
+
+        this.currentUser.username = decodedToken.given_name;
+        this.currentUser.email = decodedToken.email;
+        this.currentUser.jobtitle = decodedToken.JobTitle;
+        this.currentUser.role = decodedToken.role;
 
         localStorage.setItem('token', response.token);
 
@@ -33,8 +39,19 @@ export class AuthService {
     );
   }
 
+  loggedIn(): boolean {
+    const token = localStorage.getItem('token');
+    return !this.helper.isTokenExpired(token);
+  }
+
   logout() {
-    this.isLoggedIn = false;
+    this.currentUser = {
+      username: null,
+      email: null,
+      role: null,
+      jobtitle: null,
+    };
+    localStorage.removeItem('token');
   }
 
   register(model: any) {

@@ -5,10 +5,10 @@
 
 	<div class="collapse navbar-collapse" id="navbarColor01">
 		<ul class="navbar-nav mr-auto">
-			<li class="nav-item">
+			<li class="nav-item" *ngIf="isAdmin()">
 				<a class="nav-link" [routerLink]="['admin']" routerLinkActive="active"><i class="fas fa-user-shield"></i> Admin</a>
 			</li>
-			<li class="nav-item">
+			<li class="nav-item" *ngIf="isManager()">
 				<a class="nav-link" [routerLink]="['manager']" routerLinkActive="Manager"><i class="fas fa-user-cog"></i> Manager</a>
 			</li>
 			<li class="nav-item">

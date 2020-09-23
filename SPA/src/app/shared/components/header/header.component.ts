@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgProgress } from 'ngx-progressbar';
+import { AuthService } from 'src/app/modules/auth/resources/auth.service';
 import { ProgressbarService } from '../../services/progressbar.service';
 
 @Component({
@@ -10,10 +11,19 @@ import { ProgressbarService } from '../../services/progressbar.service';
 export class HeaderComponent implements OnInit {
   constructor(
     private progress: NgProgress,
-    public progressBar: ProgressbarService
+    public progressBar: ProgressbarService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
     this.progressBar.progressRef = this.progress.ref('progressBar');
+  }
+
+  isAdmin(): boolean {
+    return this.authService.currentUser.role == 'Administrator' ? true : false;
+  }
+
+  isManager(): boolean {
+    return this.authService.currentUser.role == 'Manager' ? true : false;
   }
 }
