@@ -8,4 +8,10 @@
 
 	<a class="btn btn-warning" routerLink=""><i class="fas fa-home"></i> Home</a>
 
+	<h4>Top secret stuff for Manager Developers</h4>
+	<div *ngIf="secrets$ | async as secrets">
+		<p>Role: {{secrets.role}}</p>
+		<p>Claim: {{secrets.claim}}</p>
+	</div>
+
 </div>

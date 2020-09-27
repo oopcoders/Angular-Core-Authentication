@@ -7,4 +7,10 @@
 	<p>Some secret data that only admins can see below</p>
 
 	<a class="btn btn-danger" routerLink=""><i class="fas fa-home"></i> Home</a>
+
+	<h4>Top secret stuff for Admin Developers</h4>
+	<div *ngIf="secrets$ | async as secrets">
+		<p>Role: {{secrets.role}}</p>
+		<p>Claim: {{secrets.claim}}</p>
+	</div>
 </div>
