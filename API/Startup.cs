@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Data;
+using Core.Services.Email;
 using Core.Services.Token;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -35,6 +36,7 @@ namespace API
 			services.AddControllers();
 
 			services.AddScoped<IJWTTokenGenerator, JWTTokenGenerator>();
+			services.AddSingleton<IEmailSender, EmailSender>();
 
 
 			services.AddDbContext<ApplicationDBContext>(x => x.UseSqlite(Configuration.GetConnectionString("Default")));
@@ -50,8 +52,9 @@ namespace API
 				opt.Password.RequiredLength = 4;
 
 				opt.User.RequireUniqueEmail = true;
+				opt.SignIn.RequireConfirmedEmail = true;
 			}
-			).AddEntityFrameworkStores<ApplicationDBContext>();
+			).AddEntityFrameworkStores<ApplicationDBContext>().AddDefaultTokenProviders();
 
 
 			services.AddAuthentication(cfg =>

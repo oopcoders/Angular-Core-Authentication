@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web;
 using API.ViewModels;
+using Core.Services.Email;
 using Core.Services.Token;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace API.Controllers
@@ -20,15 +23,21 @@ namespace API.Controllers
 		private readonly SignInManager<IdentityUser> _signInManager;
 		private readonly IJWTTokenGenerator _jwtToken;
 		private readonly RoleManager<IdentityRole> _roleManager;
+		private readonly IConfiguration _config;
+		private readonly IEmailSender _emailSender;
 
 		public IdentityController(
 			UserManager<IdentityUser> userManager,
 			 SignInManager<IdentityUser> signInManager,
 			  IJWTTokenGenerator jwtToken,
-			  RoleManager<IdentityRole> roleManager)
+			  RoleManager<IdentityRole> roleManager,
+			  IConfiguration config,
+			  IEmailSender emailSender)
 		{
 			_jwtToken = jwtToken;
 			_roleManager = roleManager;
+			_config = config;
+			_emailSender = emailSender;
 			_signInManager = signInManager;
 			_userManager = userManager;
 
@@ -87,6 +96,19 @@ namespace API.Controllers
 			{
 
 				var userFromDb = await _userManager.FindByNameAsync(userToCreate.UserName);
+
+				var token = await _userManager.GenerateEmailConfirmationTokenAsync(userFromDb);
+
+				var uriBuilder = new UriBuilder(_config["ReturnPaths:ConfirmEmail"]);
+				var query = HttpUtility.ParseQueryString(uriBuilder.Query);
+				query["token"] = token;
+				query["userid"] = userFromDb.Id;
+				uriBuilder.Query = query.ToString();
+				var urlString = uriBuilder.ToString();
+
+				var senderEmail = _config["ReturnPaths:SenderEmail"];
+
+				await _emailSender.SendEmailAsync(senderEmail, userFromDb.Email, "Confirm your email address", urlString);
 
 				//Add role to user
 				await _userManager.AddToRoleAsync(userFromDb, model.Role);
