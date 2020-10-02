@@ -1,0 +1,224 @@
+{
+	"info": {
+		"_postman_id": "6c5cf2e9-404a-4e91-b361-83409fd14e45",
+		"name": "ASP.NET Core & Angular Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:5000/value",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoibWlrZSIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsIm5iZiI6MTYwMDQzMjc5NiwiZXhwIjoxNjAxMDM3NTk2LCJpYXQiOjE2MDA0MzI3OTYsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTAwMCJ9.I0q1T46Te1nnT49tMhbg-TSEUTHZMXlj_N0R8XXGQqA",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/value",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"value"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/identity/register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"test101@test.com\",\r\n    \"username\": \"mike101\",\r\n    \"password\": \"1234\",\r\n    \"role\": \"Manager\",\r\n    \"jobtitle\": \"Developer\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/identity/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"identity",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/identity/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"mike101\",\r\n    \"password\": \"1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/identity/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"identity",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/user/admins",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoidGVzdDMiLCJlbWFpbCI6InRlc3QzQHRlc3QuY29tIiwibmJmIjoxNTk5NzQ0NTI2LCJleHAiOjE2MDAzNDkzMjYsImlhdCI6MTU5OTc0NDUyNiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MDAwIn0.xVoNJbjSSgTEw5ibKAehFaD33TLSzteH35YEsmjSSTM",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/user/admins",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"user",
+						"admins"
+					]
+				},
+				"description": "You must have a role of administrator to use this api"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/user/managers",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoidGVzdDMiLCJlbWFpbCI6InRlc3QzQHRlc3QuY29tIiwicm9sZSI6Ik1hbmFnZXIiLCJuYmYiOjE1OTk3NDY0NjAsImV4cCI6MTYwMDM1MTI2MCwiaWF0IjoxNTk5NzQ2NDYwLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUwMDAifQ.tPkf8E_3-VY-eZycsKU5PQVFqmWZrooy8fs49TKW36Y",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/user/managers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"user",
+						"managers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/user/users",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoidGVzdDMiLCJlbWFpbCI6InRlc3QzQHRlc3QuY29tIiwibmJmIjoxNTk5NzQ0NTI2LCJleHAiOjE2MDAzNDkzMjYsImlhdCI6MTU5OTc0NDUyNiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MDAwIn0.xVoNJbjSSgTEw5ibKAehFaD33TLSzteH35YEsmjSSTM",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/user/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"user",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/user/managerdevelopers",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJKb2JUaXRsZSI6IkRldmVsb3BlciIsImdpdmVuX25hbWUiOiJ0ZXN0NSIsImVtYWlsIjoidGVzdDVAdGVzdC5jb20iLCJyb2xlIjoiTWFuYWdlciIsIm5iZiI6MTU5OTgyNjUyNSwiZXhwIjoxNjAwNDMxMzI1LCJpYXQiOjE1OTk4MjY1MjUsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTAwMCJ9.xLCe37_sQWd-QLOND8-pkZnLoRqGfpCbSQWNqG4mIbo"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/user/managerdevelopers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"user",
+						"managerdevelopers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/user/admindevelopers",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJKb2JUaXRsZSI6IkRldmVsb3BlciIsImdpdmVuX25hbWUiOiJ0ZXN0NiIsImVtYWlsIjoidGVzdDZAdGVzdC5jb20iLCJyb2xlIjoiQWRtaW5pc3RyYXRvciIsIm5iZiI6MTU5OTgyNjAzOCwiZXhwIjoxNjAwNDMwODM4LCJpYXQiOjE1OTk4MjYwMzgsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTAwMCJ9.x1mav-T7kemjwDCDNtdMhGkXuTRGkpXiBPFVx1wRZ6Q"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/user/admindevelopers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"user",
+						"admindevelopers"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
