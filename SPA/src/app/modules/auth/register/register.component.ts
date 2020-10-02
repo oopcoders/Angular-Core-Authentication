@@ -18,7 +18,8 @@ export class RegisterComponent implements OnInit {
     email: null,
     password: null,
     role: 'Administrator',
-    claim: 'Developer',
+    jobtitle: 'Developer',
+    //claim: 'Developer',
   };
   constructor(
     private progressService: ProgressbarService,
