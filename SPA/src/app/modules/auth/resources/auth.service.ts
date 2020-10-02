@@ -59,8 +59,6 @@ export class AuthService {
   }
 
   confirmEmail(model: any) {
-    //Video 16
-    return of();
-    //return this.http.post(this.baseUrl + 'identity/confirmemail', model);
+    return this.http.post(this.baseUrl + 'identity/confirmemail', model);
   }
 }

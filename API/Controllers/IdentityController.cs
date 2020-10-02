@@ -124,9 +124,18 @@ namespace API.Controllers
 		}
 
 		[HttpPost("confirmemail")]
-		public IActionResult ConfirmEmail(ConfirmEmailViewModel model)
+		public async Task<IActionResult> ConfirmEmail(ConfirmEmailViewModel model)
 		{
-			return Ok();
+
+			var user = await _userManager.FindByIdAsync(model.UserId);
+
+			var result = await _userManager.ConfirmEmailAsync(user, model.Token);
+
+			if (result.Succeeded)
+			{
+				return Ok();
+			}
+			return BadRequest();
 		}
 	}
 }
